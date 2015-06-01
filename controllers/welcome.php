@@ -8,9 +8,10 @@ class Welcome extends Controller {
 
    public function index() {
       $data['title'] = 'Home';
-      $this->connect();
 
       $this->_view->render('header', $data);
+
+      $this->connect();
       //$this->_view->render('welcome', $data);
       //$this->_view->render('test', $data);
       $this->_view->render('footer');
@@ -61,7 +62,7 @@ class Welcome extends Controller {
 
 	      if($result==TRUE){  
 	          //explode
-	      	  echo '<pre>';
+	      	  //echo '<pre>';
 	          $str = $page;
 	          $preg=preg_match_all('#<a.*?>(.*?)<\/a>#', $str, $parts);
 	          if($preg==TRUE){
@@ -82,19 +83,65 @@ class Welcome extends Controller {
 	          	print_r ( $parts[1][71]);
 	          	print_r ( $parts[1][74]);*/ 	
 	          }      
-	          echo '</pre>';
-	          /*$preg_title=preg_match_all('#<h1 id="page_title">(.*?)<\/h1>#', $str, $parts);
-	          if($preg==TRUE){
-	          	print_r ( $parts[1][0]);
-	          }*/
-	          $preg_div=preg_match_all('/<div class="cover">[^<]*(<a.*?>\<img\s.+\><\/a>[^<]*)+[^<]*<\/div>/si', $str, $parts);
-	          if($preg==TRUE){
-	          	print_r ( $parts[1][0]);
+	          //echo '</pre>';
+	          //title
+	          $preg_title=preg_match_all('/<h1 id="page_title">(.*)<\/h1>/iU', $str, $parts);
+	          if($preg_title==TRUE){
+	          	echo '<h1>'.$parts[1][0].'</h1>';
 	          }
-	          	/*$re = '/(alt|href|src)=("[^"]*")/'; 
-
-				preg_match_all($re, $str, $matches);
-				print_r($matches);	*/	
+	          //content
+	          $preg_div=preg_match_all('/<div class="content">(.*?)<\/div>/s', $str, $parts);
+	          if($preg_div==TRUE){
+	          	//echo '<p>'.$parts[1][1].'</p>';
+	          	//echo '<p>'.$parts[1][2].'</p>';
+	          }
+	          $preg_div=preg_match_all('/<p>(.*?)<\/p>/s', $str, $parts);
+	          if($preg_div==TRUE){
+	          	echo '<p>1.'.$parts[1][3].'</p>';
+	          	echo '<p>2.'.$parts[1][4].'</p>';
+	          }	          
+	          echo "<br>";
+	          $preg_div=preg_match_all('/<p class="genres">(.*?)<\/p>/s', $str, $parts);
+	          if($preg_div==TRUE){
+	           echo '<p>1.'.$parts[1][0].'</p>';
+	           echo '<p>2.'.$parts[1][1].'</p>';
+	          }
+	          echo "<br>";
+	          $preg_div=preg_match_all('/<span class="year">(.*?)<\/span>/s', $str, $parts);
+	          if($preg_div==TRUE){
+	           echo '<p>1.'.$parts[1][0].'</p>';
+	           echo '<p>2.'.$parts[1][1].'</p>';
+	          }
+	          $preg_title=preg_match_all('/(?<!_)href=\"(.*?)"/', $str, $parts);
+	          if($preg_title==TRUE){
+	          	echo '<p>'.$parts[1][5].'</p>';
+	          }
+	          echo "<br>";
+	          $preg_div=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $parts);
+	          if($preg_div==TRUE){
+	          	//print_r($parts[1]);
+	          	echo '<p>1.'.$parts[1][0].'.jpg</p>';
+	          	echo '<p>2.'.$parts[1][1].'.jpg</p>';
+	          	/*print_r ( $parts[1][29]);
+	          	print_r ( $parts[1][31]);
+	          	print_r ( $parts[1][33]);
+	          	print_r ( $parts[1][36]);
+	          	echo "\n";
+	          	print_r ( $parts[1][38]);
+	          	print_r ( $parts[1][40]);
+	          	print_r ( $parts[1][42]);
+	          	print_r ( $parts[1][44]);
+	          	echo "\n";
+	          	print_r ( $parts[1][46]);
+	          	print_r ( $parts[1][48]);
+	          	print_r ( $parts[1][50]);
+	          	print_r ( $parts[1][52]);
+	          	echo "\n";
+	          	print_r ( $parts[1][54]);
+	          	print_r ( $parts[1][57]);
+	          	print_r ( $parts[1][59]);
+	          	print_r ( $parts[1][61]);*/
+	          }
 	      }
 	   }
 
