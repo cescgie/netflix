@@ -114,87 +114,134 @@ class Welcome extends Controller {
 	           //echo '<p>1.'.$movie_year[1][0].'</p>';
 	           //echo '<p>2.'.$movie_year[1][1].'</p>';
 	          }
-	          $preg_url=preg_match_all('/(?<!_)href=\"(.*?)"/', $str, $movie_url);
-	          if($preg_url==TRUE){
-	          	//echo '<p>'.$movie_url[1][5].'</p>';
+	          $preg_movie_title=preg_match_all('/<h4><a.*?>(.*?)<\/a><\/h4>/iU', $str, $movie_title);
+	          if($preg_movie_title==TRUE){
+	          	//echo '<p>'.$movie_title[1][0].'</p>';
+	          	//echo '<p>'.$movie_title[1][3].'</p>';
+	          }
+	          //This first step grabs the contents of the div.
+				//preg_match_all('#(?<=<div class="watchonnetflix_sm">).*?(?=</div>)#is', $url, $x);
+				//echo '<p>url '.$x[0][0].'</p>';
+
+				//And here, we grab all of the links.
+				//preg_match_all('#href="(.*?)"#is', $x[0], $x);
+				//echo '<p>url '.$x[1][0].'</p>';
+
+	          $preg_movie_url_content=preg_match_all('/<div class="watchonnetflix_sm">(.*?)<\/div>/is', $str, $movie_url_content);
+	          if($preg_movie_url_content==TRUE){
+	          	//echo '<p>'.$movie_url[1][0].'</p>';
+	         	$preg_movie_url2=preg_match_all('/href="(.*?)"/is', $movie_url_content[1][1], $movie_url);
+	          	echo '<a href="'.$movie_url[1][0].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
+	          	//echo '<p>'.$parts[1][2].'</p>';
 	          }
 	          $preg_img=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $image);
 	          if($preg_img==TRUE){
+	          	echo '<br><br>';
+	          	echo '<h4>1.'.$movie_title[1][0].'</h4>';
 	          	echo '<img src="'.$image[1][0].'.jpg"/>';
-	          	echo '<p>1.'.$description[1][3].'</p>';
+	          	echo '<p>'.$description[1][3].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][0].'</p>';
 	          	echo '<p>Genre : '.$genres[1][0].'</p>';
+	            echo '<a href="'.$movie_url[1][0].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	//echo '<a href="'.$image[1][0].'.jpg"><p>1.'.$image[1][0].'.jpg</p></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>2.'.$movie_title[1][1].'</h4>';
 	          	echo '<img src="'.$image[1][1].'.jpg"/>';
-	          	echo '<p>2.'.$description[1][4].'</p>';
+	          	echo '<p>'.$description[1][4].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][1].'</p>';
 	          	echo '<p>Genre : '.$genres[1][1].'</p>';
+	          	echo '<a href="'.$movie_url[1][1].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>3.'.$movie_title[1][2].'</h4>';
 	          	echo '<img src="'.$image[1][2].'.jpg"/>';
-	          	echo '<p>3.'.$description[1][5].'</p>';
+	          	echo '<p>'.$description[1][5].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][2].'</p>';
 	          	echo '<p>Genre : '.$genres[1][2].'</p>';
+	            echo '<a href="'.$movie_url[1][2].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>4.'.$movie_title[1][3].'</h4>';
 	          	echo '<img src="'.$image[1][3].'.jpg"/>';
-	          	echo '<p>4.'.$description[1][6].'</p>';
+	          	echo '<p>'.$description[1][6].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][3].'</p>';
 	          	echo '<p>Genre : '.$genres[1][3].'</p>';
+	         	echo '<a href="'.$movie_url[1][3].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>5.'.$movie_title[1][4].'</h4>';
 	          	echo '<img src="'.$image[1][4].'.jpg"/>';
-	          	echo '<p>5.'.$description[1][7].'</p>';
+	          	echo '<p>'.$description[1][7].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][4].'</p>';
 	          	echo '<p>Genre : '.$genres[1][4].'</p>';
+	          	echo '<a href="'.$movie_url[1][4].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>6.'.$movie_title[1][5].'</h4>';
 	          	echo '<img src="'.$image[1][5].'.jpg"/>';
-	          	echo '<p>6.'.$description[1][8].'</p>';
+	          	echo '<p>'.$description[1][8].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][5].'</p>';
 	          	echo '<p>Genre : '.$genres[1][5].'</p>';
+	          	echo '<a href="'.$movie_url[1][5].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>7.'.$movie_title[1][6].'</h4>';
 	          	echo '<img src="'.$image[1][6].'.jpg"/>';
-	          	echo '<p>7.'.$description[1][9].'</p>';
+	          	echo '<p>'.$description[1][9].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][6].'</p>';
 	          	echo '<p>Genre : '.$genres[1][6].'</p>';
+	          	echo '<a href="'.$movie_url[1][6].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>8.'.$movie_title[1][7].'</h4>';
 	          	echo '<img src="'.$image[1][7].'.jpg"/>';
-	          	echo '<p>8.'.$description[1][10].'</p>';
+	          	echo '<p>'.$description[1][10].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][7].'</p>';
 	          	echo '<p>Genre : '.$genres[1][7].'</p>';
+	          	echo '<a href="'.$movie_url[1][6].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>9.'.$movie_title[1][8].'</h4>';
 	          	echo '<img src="'.$image[1][8].'.jpg"/>';
-	          	echo '<p>9.'.$description[1][11].'</p>';
+	          	echo '<p>'.$description[1][11].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][8].'</p>';
 	          	echo '<p>Genre : '.$genres[1][8].'</p>';
+	          	echo '<a href="'.$movie_url[1][8].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>10.'.$movie_title[1][9].'</h4>';
 	          	echo '<img src="'.$image[1][9].'.jpg"/>';
-	          	echo '<p>10.'.$description[1][12].'</p>';
+	          	echo '<p>'.$description[1][12].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][9].'</p>';
 	          	echo '<p>Genre : '.$genres[1][9].'</p>';
+	          	echo '<a href="'.$movie_url[1][9].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>11.'.$movie_title[1][10].'</h4>';
 	          	echo '<img src="'.$image[1][10].'.jpg"/>';
-	          	echo '<p>11.'.$description[1][13].'</p>';
+	          	echo '<p>'.$description[1][13].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][10].'</p>';
 	          	echo '<p>Genres : '.$genres[1][10].'</p>';
+	          	echo '<a href="'.$movie_url[1][10].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>12.'.$movie_title[1][11].'</h4>';
 	          	echo '<img src="'.$image[1][11].'.jpg"/>';
-	          	echo '<p>12.'.$description[1][14].'</p>';
+	          	echo '<p>'.$description[1][14].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][11].'</p>';
 	          	echo '<p>Genres : '.$genres[1][11].'</p>';
+	          	echo '<a href="'.$movie_url[1][11].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>13.'.$movie_title[1][12].'</h4>';
 	          	echo '<img src="'.$image[1][12].'.jpg"/>';
-	          	echo '<p>13.'.$description[1][15].'</p>';
+	          	echo '<p>'.$description[1][15].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][12].'</p>';
 	          	echo '<p>Genres : '.$genres[1][12].'</p>';
+	          	echo '<a href="'.$movie_url[1][12].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>14.'.$movie_title[1][13].'</h4>';
 	          	echo '<img src="'.$image[1][13].'.jpg"/>';
-	          	echo '<p>14.'.$description[1][16].'</p>';
+	          	echo '<p>'.$description[1][16].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][13].'</p>';
 	          	echo '<p>Genres : '.$genres[1][13].'</p>';
+	          	echo '<a href="'.$movie_url[1][13].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          	echo '<br><br>';
+	          	echo '<h4>15.'.$movie_title[1][14].'</h4>';
 	          	echo '<img src="'.$image[1][14].'.jpg"/>';
-	          	echo '<p>15.'.$description[1][17].'</p>';
+	          	echo '<p>'.$description[1][17].'</p>';
 	          	echo '<p>Year : '.$movie_year[1][14].'</p>';
 	          	echo '<p>Genres : '.$genres[1][14].'</p>';
+	          	echo '<a href="'.$movie_url[1][14].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
 	          }
 	      }
 	   }
