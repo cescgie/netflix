@@ -9,20 +9,9 @@ class Home extends Controller {
    public function index() {
       $data['title'] = 'Home';
       $data['new_releases'] = $this->_model->all();
-      
-      /*$datac= '"Benji the Hunted"';
-      $how['numrows'] = $this->_model->check($datac);
-      foreach ($how['numrows'] as $sum){
-      	  if($sum['num_rows'] > 0)
-	      {
-	      	Message::set($how.'_ok');
-	      }else{
-	      	Message::set($how.'_no');
-	      }
-      }*/
+
       $this->connect();
       $this->_view->render('header', $data);
-      //$this->_view->render('welcome', $data);
       $this->_view->render('home', $data);
       $this->_view->render('footer');
    }
@@ -76,83 +65,29 @@ class Home extends Controller {
 	          //title
 	          $preg_title=preg_match_all('/<h1 id="page_title">(.*)<\/h1>/iU', $str, $title);
 	          if($preg_title==TRUE){
-	          	echo '<h1>'.$title[1][0].'</h1>';
+	          	//echo '<h1>'.$title[1][0].'</h1>';
 	          }
 	          $preg_datum=preg_match_all('/<h3>(.*)<\/h3>/iU', $str, $datum);
 	          if($preg_datum==TRUE){
-	          	echo '<h3>'.$datum[1][0].'</h3>';
-	          }
-	          //content
-	          $preg_div=preg_match_all('/<div class="content">(.*?)<\/div>/s', $str, $parts);
-	          if($preg_div==TRUE){
-	          	//echo '<p>'.$parts[1][1].'</p>';
-	          	//echo '<p>'.$parts[1][2].'</p>';
-	          }
-	          $preg_description=preg_match_all('/<p>(.*?)<\/p>/s', $str, $description);
-	          if($preg_description==TRUE){
-	          	//echo '<p>1.'.$description[1][3].'</p>';
-	          	//echo '<p>2.'.$description[1][4].'</p>';
-	          }	 
-	          $needle = "FIND ME"; 
-	          $preg_div2=preg_match_all('/<div class="content">(.*?)<\/div>/s', $str, $description2);
-	          if($preg_div2==TRUE){
-	          	//echo '<p>1.'.$description[1][3].'</p>';
-	          	//echo '<p>2.'.$description[1][4].'</p>';
-	          	for($i = 1; $i < count($description2[1]); $i++){
-	          		if (preg_match_all("/<p>(.*?)<\/p>/sim", $description2[1][$i],$var)) {
-			          	//echo $var[1][$i][0];
-			          	//echo $var[$i][1][0];
-			          	//echo $var.$i.[1][0];
-			            //echo $description2[1][$i];
-			        }
-	          	}
-	          }
-	          //echo $description2[1][0];	       
-	          $preg_genres=preg_match_all('/<p class="genres">(.*?)<\/p>/s', $str, $genres);
-	          if($preg_genres==TRUE){
-	           //echo '<p>1.'.$genres[1][15].'</p>';
-	           //echo '<p>2.'.$genres[1][1].'</p>';
-	          }
-	          $preg_movie_year=preg_match_all('/<span class="year">(.*?)<\/span>/s', $str, $movie_year);
-	          if($preg_movie_year==TRUE){
-	           //echo '<p>1.'.$movie_year[1][0].'</p>';
-	           //echo '<p>2.'.$movie_year[1][1].'</p>';
+	          	//echo '<h3>'.$datum[1][0].'</h3>';
 	          }
 	          $preg_movie_title=preg_match_all('/<h4><a.*?>(.*?)<\/a><\/h4>/iU', $str, $movie_title);
-	          if($preg_movie_title==TRUE){
-	          	//echo '<p>'.$movie_title[1][0].'</p>';
-	          	//echo '<p>'.$movie_title[1][3].'</p>';
-	          }
-	          //This first step grabs the contents of the div.
-				//preg_match_all('#(?<=<div class="watchonnetflix_sm">).*?(?=</div>)#is', $url, $x);
-				//echo '<p>url '.$x[0][0].'</p>';
-
-				//And here, we grab all of the links.
-				//preg_match_all('#href="(.*?)"#is', $x[0], $x);
-				//echo '<p>url '.$x[1][0].'</p>';
-
-	          $preg_movie_url_content=preg_match_all('/<div class="watchonnetflix_sm">(.*?)<\/div>/is', $str, $movie_url_content);
-	          if($preg_movie_url_content==TRUE){
-	          	//echo '<p>'.$movie_url[1][0].'</p>';
-	         	/*$preg_movie_url2=preg_match_all('/href="(.*?)"/is', $movie_url_content[1][1], $movie_url1);
-	          	echo '<a href="'.$movie_url1[1][0].'" target="_blank"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
-	         	$preg_movie_url2=preg_match_all('/href="(.*?)"/is', $movie_url_content[1][2], $movie_url2);
-	          	echo '<a href="'.$movie_url2[1][0].'" target="_blank"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
-	         	$preg_movie_url2=preg_match_all('/href="(.*?)"/is', $movie_url_content[1][3], $movie_url3);
-	          	echo '<a href="'.$movie_url3[1][0].'" target="_blank"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
-	         	*/
-	          }
 	          $preg_img=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $image);
-	          if($preg_img==TRUE){
-	          	for ($i=0; $i <count($movie_title[1]); $i++) { 
+			  $preg_description=preg_match_all('/<p>(.*?)<\/p>/s', $str, $description);
+	          $preg_movie_year=preg_match_all('/<span class="year">(.*?)<\/span>/s', $str, $movie_year);
+	          $preg_genres=preg_match_all('/<p class="genres">(.*?)<\/p>/s', $str, $genres);
+	          //check all preg match
+	          if($preg_movie_title==TRUE&&$preg_img==TRUE&&$preg_description==TRUE&&$preg_movie_year==TRUE&&$preg_genres==TRUE){
+	          	for ($i=count($movie_title[1]); $i >0; $i--) { 
+	          		//echo  $description[1][$i+2];;
 	          		//serialize content
-	          		$data['movie_title'] = $movie_title[1][$i];
-			        $data['movie_image'] = $image[1][$i];
-			        $data['movie_description'] = $description[1][$i+3];
-			        $data['movie_genres'] = $genres[1][$i];
-			        $data['movie_year'] = $movie_year[1][$i];
+	          		$data['movie_title'] = $movie_title[1][$i-1];
+			        $data['movie_image'] = $image[1][$i-1];
+			        $data['movie_description'] = $description[1][$i+2];
+			        $data['movie_genres'] = $genres[1][$i-1];
+			        $data['movie_year'] = $movie_year[1][$i-1];
 			        //check if title already exists
-	          		$datac= $movie_title[1][$i];
+	          		$datac= $movie_title[1][$i-1];
 				    $how['numrows'] = $this->_model->check($datac);
 				    foreach ($how['numrows'] as $sum){
 				    	//if the title exists, no aaction
@@ -163,10 +98,10 @@ class Home extends Controller {
 					    	//insert to DB
 			          		$this->_model->insert($data);
 					    }
-				    }
-	       		}
-	        }
-		}
+				    } // end of foreach ($how['numrows'] as $sum){
+	       		} // end of for ($i=count($movie_title[1]); $i >0; $i--) { 
+	        } // end of check all preg match
+		} // end of if($result==TRUE){
 	}
 
 }
