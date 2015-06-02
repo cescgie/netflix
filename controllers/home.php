@@ -9,18 +9,19 @@ class Home extends Controller {
    public function index() {
       $data['title'] = 'Home';
       $data['new_releases'] = $this->_model->all();
-      $datac= 'Benji the Hunted';
-      $how = $this->_model->check($datac);
-      if($how = 1)
-      {
-      	Message::set($how.'_1');
-      }else{
-      	Message::set($how.'_0');
-      }
-
-      $this->_view->render('header', $data);
-
+      
+      /*$datac= '"Benji the Hunted"';
+      $how['numrows'] = $this->_model->check($datac);
+      foreach ($how['numrows'] as $sum){
+      	  if($sum['num_rows'] > 0)
+	      {
+	      	Message::set($how.'_ok');
+	      }else{
+	      	Message::set($how.'_no');
+	      }
+      }*/
       $this->connect();
+      $this->_view->render('header', $data);
       //$this->_view->render('welcome', $data);
       $this->_view->render('home', $data);
       $this->_view->render('footer');
@@ -143,116 +144,29 @@ class Home extends Controller {
 	          }
 	          $preg_img=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $image);
 	          if($preg_img==TRUE){
-	          	for ($i=0; $i < count($movie_title[1]); $i++) { 
-	          		# code...
+	          	for ($i=0; $i <count($movie_title[1]); $i++) { 
+	          		//serialize content
 	          		$data['movie_title'] = $movie_title[1][$i];
-	          		$data['movie_image'] = $image[1][$i];
-	          		$data['movie_description'] = $description[1][$i+3];
-	          		$data['movie_genres'] = $genres[1][$i];
-	          		$data['movie_year'] = $movie_year[1][$i];
-	          		//$this->_model->insert($data);
-	          		//echo $data['movie_year'];
-	          	}/*
-	          	echo '<br><br>';
-	          	echo '<h4>1.'.$movie_title[1][0].'</h4>';
-	          	echo '<img src="'.$image[1][0].'.jpg"/>';
-	          	echo '<p>'.$description[1][3].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][0].'</p>';
-	          	echo '<p>Genre : '.$genres[1][0].'</p>';
-	          	//echo '<a href="'.$movie_url[1][0].'"><img src="http://ger.whatsnewonnetflix.com/assets/watch-on-netflix-sm-bf43e0c64985c1127adf6b16acdb590c.png"/></a>';
-	          	//echo '<a href="'.$image[1][0].'.jpg"><p>1.'.$image[1][0].'.jpg</p></a>';
-	          	echo '<br><br>';
-	          	echo '<h4>2.'.$movie_title[1][1].'</h4>';
-	          	echo '<img src="'.$image[1][1].'.jpg"/>';
-	          	echo '<p>'.$description[1][4].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][1].'</p>';
-	          	echo '<p>Genre : '.$genres[1][1].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>3.'.$movie_title[1][2].'</h4>';
-	          	echo '<img src="'.$image[1][2].'.jpg"/>';
-	          	echo '<p>'.$description[1][5].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][2].'</p>';
-	          	echo '<p>Genre : '.$genres[1][2].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>4.'.$movie_title[1][3].'</h4>';
-	          	echo '<img src="'.$image[1][3].'.jpg"/>';
-	          	echo '<p>'.$description[1][6].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][3].'</p>';
-	          	echo '<p>Genre : '.$genres[1][3].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>5.'.$movie_title[1][4].'</h4>';
-	          	echo '<img src="'.$image[1][4].'.jpg"/>';
-	          	echo '<p>'.$description[1][7].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][4].'</p>';
-	          	echo '<p>Genre : '.$genres[1][4].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>6.'.$movie_title[1][5].'</h4>';
-	          	echo '<img src="'.$image[1][5].'.jpg"/>';
-	          	echo '<p>'.$description[1][8].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][5].'</p>';
-	          	echo '<p>Genre : '.$genres[1][5].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>7.'.$movie_title[1][6].'</h4>';
-	          	echo '<img src="'.$image[1][6].'.jpg"/>';
-	          	echo '<p>'.$description[1][9].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][6].'</p>';
-	          	echo '<p>Genre : '.$genres[1][6].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>8.'.$movie_title[1][7].'</h4>';
-	          	echo '<img src="'.$image[1][7].'.jpg"/>';
-	          	echo '<p>'.$description[1][10].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][7].'</p>';
-	          	echo '<p>Genre : '.$genres[1][7].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>9.'.$movie_title[1][8].'</h4>';
-	          	echo '<img src="'.$image[1][8].'.jpg"/>';
-	          	echo '<p>'.$description[1][11].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][8].'</p>';
-	          	echo '<p>Genre : '.$genres[1][8].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>10.'.$movie_title[1][9].'</h4>';
-	          	echo '<img src="'.$image[1][9].'.jpg"/>';
-	          	echo '<p>'.$description[1][12].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][9].'</p>';
-	          	echo '<p>Genre : '.$genres[1][9].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>11.'.$movie_title[1][10].'</h4>';
-	          	echo '<img src="'.$image[1][10].'.jpg"/>';
-	          	echo '<p>'.$description[1][13].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][10].'</p>';
-	          	echo '<p>Genres : '.$genres[1][10].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>12.'.$movie_title[1][11].'</h4>';
-	          	echo '<img src="'.$image[1][11].'.jpg"/>';
-	          	echo '<p>'.$description[1][14].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][11].'</p>';
-	          	echo '<p>Genres : '.$genres[1][11].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>13.'.$movie_title[1][12].'</h4>';
-	          	echo '<img src="'.$image[1][12].'.jpg"/>';
-	          	echo '<p>'.$description[1][15].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][12].'</p>';
-	          	echo '<p>Genres : '.$genres[1][12].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>14.'.$movie_title[1][13].'</h4>';
-	          	echo '<img src="'.$image[1][13].'.jpg"/>';
-	          	echo '<p>'.$description[1][16].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][13].'</p>';
-	          	echo '<p>Genres : '.$genres[1][13].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>15.'.$movie_title[1][14].'</h4>';
-	          	echo '<img src="'.$image[1][14].'.jpg"/>';
-	          	echo '<p>'.$description[1][17].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][14].'</p>';
-	          	echo '<p>Genres : '.$genres[1][14].'</p>';
-	          	echo '<br><br>';
-	          	echo '<h4>16.'.$movie_title[1][15].'</h4>';
-	          	echo '<img src="'.$image[1][15].'.jpg"/>';
-	          	echo '<p>'.$description[1][18].'</p>';
-	          	echo '<p>Year : '.$movie_year[1][15].'</p>';
-	          	echo '<p>Genres : '.$genres[1][15].'</p>';*/
-	          }
-	      }
-	   }
+			        $data['movie_image'] = $image[1][$i];
+			        $data['movie_description'] = $description[1][$i+3];
+			        $data['movie_genres'] = $genres[1][$i];
+			        $data['movie_year'] = $movie_year[1][$i];
+			        //check if title already exists
+	          		$datac= $movie_title[1][$i];
+				    $how['numrows'] = $this->_model->check($datac);
+				    foreach ($how['numrows'] as $sum){
+				    	//if the title exists, no aaction
+				    	if($sum['num_rows'] > 0)
+					    {
+					    	//No Action
+					    }else{
+					    	//insert to DB
+			          		$this->_model->insert($data);
+					    }
+				    }
+	       		}
+	        }
+		}
+	}
 
 }
