@@ -85,9 +85,13 @@ class Welcome extends Controller {
 	          }      
 	          //echo '</pre>';
 	          //title
-	          $preg_title=preg_match_all('/<h1 id="page_title">(.*)<\/h1>/iU', $str, $parts);
+	          $preg_title=preg_match_all('/<h1 id="page_title">(.*)<\/h1>/iU', $str, $title);
 	          if($preg_title==TRUE){
-	          	echo '<h1>'.$parts[1][0].'</h1>';
+	          	echo '<h1>'.$title[1][0].'</h1>';
+	          }
+	          $preg_datum=preg_match_all('/<h3>(.*)<\/h3>/iU', $str, $datum);
+	          if($preg_datum==TRUE){
+	          	echo '<h3>'.$datum[1][0].'</h3>';
 	          }
 	          //content
 	          $preg_div=preg_match_all('/<div class="content">(.*?)<\/div>/s', $str, $parts);
@@ -95,52 +99,102 @@ class Welcome extends Controller {
 	          	//echo '<p>'.$parts[1][1].'</p>';
 	          	//echo '<p>'.$parts[1][2].'</p>';
 	          }
-	          $preg_div=preg_match_all('/<p>(.*?)<\/p>/s', $str, $parts);
-	          if($preg_div==TRUE){
-	          	echo '<p>1.'.$parts[1][3].'</p>';
-	          	echo '<p>2.'.$parts[1][4].'</p>';
+	          $preg_description=preg_match_all('/<p>(.*?)<\/p>/s', $str, $description);
+	          if($preg_description==TRUE){
+	          	//echo '<p>1.'.$description[1][3].'</p>';
+	          	//echo '<p>2.'.$description[1][4].'</p>';
 	          }	          
-	          echo "<br>";
-	          $preg_div=preg_match_all('/<p class="genres">(.*?)<\/p>/s', $str, $parts);
-	          if($preg_div==TRUE){
-	           echo '<p>1.'.$parts[1][0].'</p>';
-	           echo '<p>2.'.$parts[1][1].'</p>';
+	          $preg_genres=preg_match_all('/<p class="genres">(.*?)<\/p>/s', $str, $genres);
+	          if($preg_genres==TRUE){
+	           //echo '<p>1.'.$genres[1][0].'</p>';
+	           //echo '<p>2.'.$genres[1][1].'</p>';
 	          }
-	          echo "<br>";
-	          $preg_div=preg_match_all('/<span class="year">(.*?)<\/span>/s', $str, $parts);
-	          if($preg_div==TRUE){
-	           echo '<p>1.'.$parts[1][0].'</p>';
-	           echo '<p>2.'.$parts[1][1].'</p>';
+	          $preg_movie_year=preg_match_all('/<span class="year">(.*?)<\/span>/s', $str, $movie_year);
+	          if($preg_movie_year==TRUE){
+	           //echo '<p>1.'.$movie_year[1][0].'</p>';
+	           //echo '<p>2.'.$movie_year[1][1].'</p>';
 	          }
-	          $preg_title=preg_match_all('/(?<!_)href=\"(.*?)"/', $str, $parts);
-	          if($preg_title==TRUE){
-	          	echo '<p>'.$parts[1][5].'</p>';
+	          $preg_url=preg_match_all('/(?<!_)href=\"(.*?)"/', $str, $movie_url);
+	          if($preg_url==TRUE){
+	          	//echo '<p>'.$movie_url[1][5].'</p>';
 	          }
-	          echo "<br>";
-	          $preg_div=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $parts);
-	          if($preg_div==TRUE){
-	          	//print_r($parts[1]);
-	          	echo '<p>1.'.$parts[1][0].'.jpg</p>';
-	          	echo '<p>2.'.$parts[1][1].'.jpg</p>';
-	          	/*print_r ( $parts[1][29]);
-	          	print_r ( $parts[1][31]);
-	          	print_r ( $parts[1][33]);
-	          	print_r ( $parts[1][36]);
-	          	echo "\n";
-	          	print_r ( $parts[1][38]);
-	          	print_r ( $parts[1][40]);
-	          	print_r ( $parts[1][42]);
-	          	print_r ( $parts[1][44]);
-	          	echo "\n";
-	          	print_r ( $parts[1][46]);
-	          	print_r ( $parts[1][48]);
-	          	print_r ( $parts[1][50]);
-	          	print_r ( $parts[1][52]);
-	          	echo "\n";
-	          	print_r ( $parts[1][54]);
-	          	print_r ( $parts[1][57]);
-	          	print_r ( $parts[1][59]);
-	          	print_r ( $parts[1][61]);*/
+	          $preg_img=preg_match_all('/(?<!_)src=\"(.*?)(.jpg)"/', $str, $image);
+	          if($preg_img==TRUE){
+	          	echo '<img src="'.$image[1][0].'.jpg"/>';
+	          	echo '<p>1.'.$description[1][3].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][0].'</p>';
+	          	echo '<p>Genre : '.$genres[1][0].'</p>';
+	          	//echo '<a href="'.$image[1][0].'.jpg"><p>1.'.$image[1][0].'.jpg</p></a>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][1].'.jpg"/>';
+	          	echo '<p>2.'.$description[1][4].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][1].'</p>';
+	          	echo '<p>Genre : '.$genres[1][1].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][2].'.jpg"/>';
+	          	echo '<p>3.'.$description[1][5].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][2].'</p>';
+	          	echo '<p>Genre : '.$genres[1][2].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][3].'.jpg"/>';
+	          	echo '<p>4.'.$description[1][6].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][3].'</p>';
+	          	echo '<p>Genre : '.$genres[1][3].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][4].'.jpg"/>';
+	          	echo '<p>5.'.$description[1][7].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][4].'</p>';
+	          	echo '<p>Genre : '.$genres[1][4].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][5].'.jpg"/>';
+	          	echo '<p>6.'.$description[1][8].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][5].'</p>';
+	          	echo '<p>Genre : '.$genres[1][5].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][6].'.jpg"/>';
+	          	echo '<p>7.'.$description[1][9].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][6].'</p>';
+	          	echo '<p>Genre : '.$genres[1][6].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][7].'.jpg"/>';
+	          	echo '<p>8.'.$description[1][10].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][7].'</p>';
+	          	echo '<p>Genre : '.$genres[1][7].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][8].'.jpg"/>';
+	          	echo '<p>9.'.$description[1][11].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][8].'</p>';
+	          	echo '<p>Genre : '.$genres[1][8].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][9].'.jpg"/>';
+	          	echo '<p>10.'.$description[1][12].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][9].'</p>';
+	          	echo '<p>Genre : '.$genres[1][9].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][10].'.jpg"/>';
+	          	echo '<p>11.'.$description[1][13].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][10].'</p>';
+	          	echo '<p>Genres : '.$genres[1][10].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][11].'.jpg"/>';
+	          	echo '<p>12.'.$description[1][14].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][11].'</p>';
+	          	echo '<p>Genres : '.$genres[1][11].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][12].'.jpg"/>';
+	          	echo '<p>13.'.$description[1][15].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][12].'</p>';
+	          	echo '<p>Genres : '.$genres[1][12].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][13].'.jpg"/>';
+	          	echo '<p>14.'.$description[1][16].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][13].'</p>';
+	          	echo '<p>Genres : '.$genres[1][13].'</p>';
+	          	echo '<br><br>';
+	          	echo '<img src="'.$image[1][14].'.jpg"/>';
+	          	echo '<p>15.'.$description[1][17].'</p>';
+	          	echo '<p>Year : '.$movie_year[1][14].'</p>';
+	          	echo '<p>Genres : '.$genres[1][14].'</p>';
 	          }
 	      }
 	   }
