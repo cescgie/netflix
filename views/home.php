@@ -11,7 +11,10 @@
                   '<!-- Table -->
                     <table class="table">
                       <tr>
-                        <td width="60%"><h3>New Releases</h3></td>
+                        <td width="60%">
+                          <h3>New Releases</h3>
+                          <p>Updated : '.$data['datum'].'</p>
+                        </td>
                         <td width="40%"></td> 
                       </tr>
                       <tr>

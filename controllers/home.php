@@ -9,7 +9,8 @@ class Home extends Controller {
    public function index() {
       $data['title'] = 'Home';
       $data['new_releases'] = $this->_model->all();
-
+      $data['datum'] = date("F j,Y, g:i a");
+      
       $this->connect();
       $this->_view->render('header', $data);
       $this->_view->render('home', $data);
